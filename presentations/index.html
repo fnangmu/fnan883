@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Presentations &middot; FNAN 883</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">FNAN 883 &middot; Empirical Asset Pricing</p>
+    <h1>Student Presentations</h1>
+    <p class="lede">Papers presented in the doctoral seminar. Each entry links to that student&rsquo;s presentation page.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="count" id="count"></p>
+    <ul class="grid" id="grid"></ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Adding your own? Branch from <code>main</code>, drop your slides in
+    <code>presentations/&lt;your-name&gt;/</code>, append one line to
+    <code>presentations.js</code>, then open a merge.
+    Full steps in <a class="plain" href="README.md">README.md</a>.
+  </div>
+</footer>
+
+<script src="presentations.js"></script>
+<script>
+(function () {
+  var grid  = document.getElementById('grid');
+  var count = document.getElementById('count');
+  var items = (window.PRESENTATIONS || []).slice();
+
+  if (!items.length) {
+    count.textContent = '';
+    grid.outerHTML = '<div class="empty">No presentations registered yet.</div>';
+    return;
+  }
+
+  // Chronological, matching the order of the seminar.
+  items.sort(function (a, b) { return String(a.date || '').localeCompare(String(b.date || '')); });
+
+  count.textContent = items.length + (items.length === 1 ? ' presentation' : ' presentations');
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+
+  items.forEach(function (p) {
+    var a = el('a');
+    // Slug is used as a path segment, so keep it to safe characters.
+    a.href = String(p.slug || '').replace(/[^A-Za-z0-9._-]/g, '') + '/';
+
+    a.appendChild(el('span', 'presenter', p.presenter || 'Unattributed'));
+    a.appendChild(el('p', 'title', p.title || 'Untitled'));
+    if (p.authors) a.appendChild(el('p', 'meta', p.authors));
+    if (p.source)  a.appendChild(el('p', 'source', p.source));
+    if (p.date)    a.appendChild(el('p', 'when', p.date));
+
+    var li = el('li', 'card');
+    li.appendChild(a);
+    grid.appendChild(li);
+  });
+})();
+</script>
+
+</body>
+</html>

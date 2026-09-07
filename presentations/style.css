@@ -1,0 +1,159 @@
+/* ---------------------------------------------------------------------------
+   FNAN 883 - shared styling for the presentation collection and the individual
+   presentation pages.
+
+   Students: you should not need to edit this file. Leaving it alone is what
+   keeps your branch free of merge conflicts.
+--------------------------------------------------------------------------- */
+
+:root {
+  --mason-green: #006633;
+  --mason-gold:  #FFCC33;
+  --bg:      #f7f7f5;
+  --surface: #ffffff;
+  --border:  #e0e0dc;
+  --ink:     #1a1a18;
+  --ink-mid: #55554e;
+  --ink-dim: #8a8a80;
+  --accent:  var(--mason-green);
+  --shadow:  0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #16161a;
+    --surface: #1f1f24;
+    --border:  #33333a;
+    --ink:     #f0f0ee;
+    --ink-mid: #b4b4ae;
+    --ink-dim: #7d7d76;
+    --accent:  #4caf7d;
+    --shadow:  0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* --- page header ---------------------------------------------------------- */
+
+header {
+  border-top: 4px solid var(--mason-green);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 0 32px;
+}
+.eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 10px;
+}
+h1 { font-size: 30px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -.01em; }
+.lede { margin: 0; color: var(--ink-mid); max-width: 60ch; }
+
+.back {
+  display: inline-block; margin-bottom: 16px;
+  font-size: 14px; color: var(--ink-mid); text-decoration: none;
+}
+.back:hover { color: var(--accent); }
+
+main { padding: 36px 0 56px; }
+
+/* --- collection grid ------------------------------------------------------ */
+
+.count {
+  font-size: 13px; color: var(--ink-dim); margin: 0 0 18px;
+  text-transform: uppercase; letter-spacing: .08em; font-weight: 600;
+}
+
+ul.grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+@media (min-width: 700px) { ul.grid { grid-template-columns: 1fr 1fr; } }
+
+.card { display: block; height: 100%; }
+.card a {
+  display: flex; flex-direction: column; height: 100%; gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 18px 20px;
+  text-decoration: none; color: inherit;
+  box-shadow: var(--shadow);
+  transition: transform .13s ease, box-shadow .13s ease, border-left-color .13s ease;
+}
+.card a:hover, .card a:focus-visible {
+  transform: translateY(-2px);
+  border-left-color: var(--mason-gold);
+  box-shadow: 0 2px 4px rgba(0,0,0,.06), 0 10px 24px rgba(0,0,0,.08);
+}
+.card a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.presenter {
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent);
+}
+.title  { font-size: 17px; font-weight: 600; line-height: 1.35; margin: 0; }
+.meta   { font-size: 14px; color: var(--ink-mid); margin: 0; }
+.source { font-size: 13px; color: var(--ink-dim); font-style: italic; margin: 0; }
+.when {
+  margin-top: auto; padding-top: 10px; font-size: 12px; color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  border: 1px dashed var(--border); border-radius: 8px;
+  padding: 40px 24px; text-align: center; color: var(--ink-dim);
+}
+
+/* --- individual presentation page ----------------------------------------- */
+
+dl.facts {
+  margin: 0 0 28px; padding: 18px 20px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  display: grid; gap: 6px 20px;
+}
+@media (min-width: 620px) { dl.facts { grid-template-columns: max-content 1fr; } }
+dl.facts dt {
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-dim); padding-top: 3px;
+}
+dl.facts dd { margin: 0; color: var(--ink); }
+
+.viewer {
+  border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.viewer object, .viewer iframe {
+  display: block; width: 100%; height: min(78vh, 760px); border: 0;
+}
+.viewer .fallback { padding: 32px 24px; text-align: center; color: var(--ink-mid); }
+
+.actions { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-block; padding: 9px 16px; border-radius: 6px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  background: var(--accent); color: #fff; border: 1px solid transparent;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.secondary { background: var(--surface); color: var(--ink); border-color: var(--border); }
+
+/* --- footer --------------------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0 48px;
+  font-size: 14px; color: var(--ink-mid);
+}
+footer code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px;
+}
+a.plain { color: var(--accent); }
