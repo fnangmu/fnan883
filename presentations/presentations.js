@@ -23,4 +23,4 @@
 
 window.PRESENTATIONS = window.PRESENTATIONS || [];
 
-PRESENTATIONS.push({ presenter: "Tan", slug: "tan", title: "A Five-Factor Asset Pricing Model", authors: "Fama and French (2015)", source: "Journal of Financial Economics 116, 1–22", date: "2026-09-07" });
+PRESENTATIONS.push({ presenter: "Tan", slug: "tan", title: "A Five-Factor Asset Pricing Model", authors: "Fama and French (2015)", source: "Journal of Financial Economics 116, 1–22", date: "2026-09-01" });
