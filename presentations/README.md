@@ -7,11 +7,16 @@ links to each student's own page.
 presentations/
 ├── index.html          the collection page (generated from presentations.js)
 ├── presentations.js    the registry — one line per presentation
-├── style.css           shared styling; you should not need to touch it
+├── style.css           a few additions to lwarp.css; you should not need to touch it
 └── <your-name>/
     ├── index.html      your presentation page
     └── your-slides.pdf your slides
 ```
+
+These pages pull their styling from `lwarp.css` at the repo root — the same
+stylesheet the syllabus uses — so they look like the rest of the site. Keep your
+folder one level under `presentations/` and the relative paths in the template
+(`../../lwarp.css`, `../style.css`) will resolve correctly.
 
 ## Adding your presentation
 

@@ -1,77 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Student Presentations &middot; FNAN 883</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FNAN 883 Student Presentations</title>
+<link rel="stylesheet" type="text/css" href="../lwarp.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <a class="back" href="../">&larr; Course home</a>
-    <p class="eyebrow">FNAN 883 &middot; Empirical Asset Pricing</p>
-    <h1>Student Presentations</h1>
-    <p class="lede">Papers presented in the doctoral seminar. Each entry links to that student&rsquo;s presentation page.</p>
-  </div>
-</header>
 
-<main>
-  <div class="wrap">
-    <p class="count" id="count"></p>
-    <ul class="grid" id="grid"></ul>
-  </div>
+<div class="bodywithoutsidetoc">
+
+
+<main class="bodycontainer">
+
+
+<section class="textbody">
+
+
+<div class="center">
+
+<p>
+<img
+    src="../ccb3.png"
+    style="
+    width:217pt;
+    "
+    class="inlineimage"
+    alt="Costello College of Business, George Mason University"
+>
+</p>
+
+</div>
+<div class="titlepage">
+
+<h1>Student Presentations</h1>
+
+
+<div class="author">
+
+
+<div class="oneauthor">
+
+<p>
+FNAN 883, Empirical Asset Pricing
+</p>
+</div>
+
+</div>
+
+
+<div class="titledate">
+
+<p>
+Fall 2026
+</p>
+</div>
+
+</div>
+<!--................................-->
+<h5>Presentations</h5>
+<div class="flushleft">
+<table id="presentation-table">
+</table>
+
+</div>
+<!--................................-->
+<h5>Adding your presentation</h5>
+
+<p>
+Branch from <span class="texttt">main</span>, put your slides in
+<span class="texttt">presentations/&lt;your-name&gt;/</span>, append one line to
+<span class="texttt">presentations.js</span>, then merge. Full instructions are in
+<a href="README.md">README.md</a>.
+</p>
+
+<p>
+<a href="../">Course home</a>
+</p>
+
+</section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    Adding your own? Branch from <code>main</code>, drop your slides in
-    <code>presentations/&lt;your-name&gt;/</code>, append one line to
-    <code>presentations.js</code>, then open a merge.
-    Full steps in <a class="plain" href="README.md">README.md</a>.
-  </div>
-</footer>
+</div>
 
 <script src="presentations.js"></script>
 <script>
 (function () {
-  var grid  = document.getElementById('grid');
-  var count = document.getElementById('count');
+  var table = document.getElementById('presentation-table');
   var items = (window.PRESENTATIONS || []).slice();
 
   if (!items.length) {
-    count.textContent = '';
-    grid.outerHTML = '<div class="empty">No presentations registered yet.</div>';
+    table.parentNode.replaceChild(
+      Object.assign(document.createElement('p'), { textContent: 'No presentations registered yet.' }),
+      table
+    );
     return;
   }
 
   // Chronological, matching the order of the seminar.
   items.sort(function (a, b) { return String(a.date || '').localeCompare(String(b.date || '')); });
 
-  count.textContent = items.length + (items.length === 1 ? ' presentation' : ' presentations');
-
-  function el(tag, cls, text) {
-    var n = document.createElement(tag);
-    if (cls) n.className = cls;
-    if (text) n.textContent = text;
-    return n;
-  }
-
   items.forEach(function (p) {
-    var a = el('a');
-    // Slug is used as a path segment, so keep it to safe characters.
-    a.href = String(p.slug || '').replace(/[^A-Za-z0-9._-]/g, '') + '/';
+    var row = table.insertRow();
 
-    a.appendChild(el('span', 'presenter', p.presenter || 'Unattributed'));
-    a.appendChild(el('p', 'title', p.title || 'Untitled'));
-    if (p.authors) a.appendChild(el('p', 'meta', p.authors));
-    if (p.source)  a.appendChild(el('p', 'source', p.source));
-    if (p.date)    a.appendChild(el('p', 'when', p.date));
+    var when = row.insertCell();
+    when.className = 'tdb';
+    when.textContent = p.date || '';
 
-    var li = el('li', 'card');
-    li.appendChild(a);
-    grid.appendChild(li);
+    var who = row.insertCell();
+    who.className = 'tdb';
+    who.textContent = p.presenter || 'Unattributed';
+
+    var what = row.insertCell();
+    what.className = 'tdp';
+
+    var para = document.createElement('p');
+    var link = document.createElement('a');
+    // Slug becomes a path segment, so keep it to safe characters.
+    link.href = String(p.slug || '').replace(/[^A-Za-z0-9._-]/g, '') + '/';
+    link.textContent = p.title || 'Untitled';
+    para.appendChild(link);
+
+    if (p.authors) {
+      para.appendChild(document.createElement('br'));
+      para.appendChild(document.createTextNode(p.authors));
+    }
+    if (p.source) {
+      para.appendChild(document.createElement('br'));
+      var cite = document.createElement('em');
+      cite.textContent = p.source;
+      para.appendChild(cite);
+    }
+
+    what.appendChild(para);
   });
 })();
 </script>
