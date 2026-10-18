@@ -1,0 +1,10 @@
+/* Use the same course stylesheet and page structure as Tan's presentation. */
+.paper-details th {
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+  padding-right: 1em;
+}
+.paper-details td { vertical-align: top; overflow-wrap: anywhere; }
+.slides { max-width: 100%; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
