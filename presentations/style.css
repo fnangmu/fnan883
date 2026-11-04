@@ -1,0 +1,20 @@
+/* ---------------------------------------------------------------------------
+   FNAN 883 - small additions on top of lwarp.css for the presentation pages.
+   The look comes from lwarp.css, which is the stylesheet the syllabus uses;
+   this file only covers what that stylesheet has no reason to define.
+
+   Students: you should not need to edit this file. Leaving it alone is what
+   keeps your branch free of merge conflicts.
+--------------------------------------------------------------------------- */
+
+/* Separate the columns of the presentation list. */
+#presentation-table td { padding: .4ex 2em .4ex 0em; }
+
+/* Inline PDF viewer on an individual presentation page. */
+object.slides {
+  display: block;
+  width: 100%;
+  height: 32em;
+  border: 1px solid silver;
+  background: white;
+}

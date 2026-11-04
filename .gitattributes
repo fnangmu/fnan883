@@ -1,0 +1,8 @@
+# The presentation registry is append-only: every student adds one line at the
+# end. "union" keeps both sides of an overlapping edit rather than producing a
+# conflict, so two students adding entries in parallel merge cleanly.
+# This relies on each entry occupying exactly one line.
+presentations/presentations.js merge=union
+
+# PDFs are binary; never try to merge or diff them as text.
+*.pdf binary
